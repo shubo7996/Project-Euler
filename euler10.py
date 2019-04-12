@@ -3,6 +3,8 @@
 
 """
 
+import time
+
 def sumofPrimes(n):
 
 	primeList=[True]*(n+1)
@@ -22,24 +24,13 @@ def sumofPrimes(n):
 		if (primeList[i]):
 			sum+=i
 
-"""
-	#Problem 7:- Finding the 10001st Prime Number
-
-"""
-	counter=0
-	for i in range(2,n+1):
-		if (primeList[i]):
-			counter+=1
-			if counter==10001:
-				print("10001st Prime Number is: {}".format(i))
-				break
-
 	
 	return sum
 
 
 if __name__ == '__main__':
+	start=time.perf_counter()
 	n=2000001
 	sumVal=sumofPrimes(n)
 	print("Sum of Prime Numbers in range of {} is: {}".format(n,sumVal))
-
+	print(f"Time Elapsed: {time.perf_counter()-start}")

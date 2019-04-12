@@ -1,3 +1,4 @@
+import time
 def main():
 	sum_of_num=0
 	pow_of_num=0
@@ -9,4 +10,6 @@ def main():
 	print("Difference of {}-{} is {}".format(square_of_sum,pow_of_num,square_of_sum-pow_of_num))
 
 if __name__ == '__main__':
+	start=time.perf_counter()
 	main()
+	print(f"Time Elapsed: {time.perf_counter()-start}")

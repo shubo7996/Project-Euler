@@ -13,9 +13,6 @@ llcm = lcm(11, 12)
 for n in range(12, 20):
   llcm = lcm(n, llcm)
 
-print (llcm)
-
-
 i = 1
 for k in (range(1, 21)): 
   if i % k > 0: 
