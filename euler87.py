@@ -25,9 +25,9 @@ def sieve(x):
 
 	return prime_numbers
 
-prime_sq=sieve(int(int(5E7)**(1/2))+1)
-prime_thrd=sieve(int(int(5E7)**(1/3))+1)
-prime_frth=sieve(int(int(5E7)**(1/4))+1)
+prime_sq=sieve(int(int(5E7)**(1/2)))
+prime_thrd=sieve(int(int(5E7)**(1/3)))
+prime_frth=sieve(int(int(5E7)**(1/4)))
 power_sum=set()
 for x in prime_sq:
 	for y in prime_thrd:
