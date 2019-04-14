@@ -1,4 +1,5 @@
 """Fibonacci Method"""
+
 '''
 import math
 
@@ -27,7 +28,7 @@ for i in lists:
 
 import time
 
-start = time.time()
+start = time.perf_counter()
 
 for num in range(1, 1000):
     for dig in range(num, 1000 - num):
@@ -35,6 +36,5 @@ for num in range(1, 1000):
         if num*num + dig*dig == i*i:
             print(num, dig, i)
             print("Product: {}".format(num * dig * i))
-
-elapsed = time.time() - start               
-print("Time: {:.5f} seconds".format(elapsed))
+               
+print("Time Elapsed: {}".format(time.perf_counter() - start))

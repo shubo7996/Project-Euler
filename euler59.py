@@ -1,3 +1,5 @@
+import time
+
 def main():
 	filepath="euler59.txt"
 	fline=open(filepath).readlines()
@@ -14,4 +16,6 @@ def main():
 	print (sum(x^y for x, y in zip(cipher, key_*(len(cipher)//3+1))))
 
 if __name__ == '__main__':
+	start=time.perf_counter()
 	main()
+	print(f"Time Elapsed: {time.perf_counter()-start}")

@@ -4,10 +4,11 @@ import time
 start_time= time.perf_counter() 
 
 def recurse(a,conv_list):
-  if len(conv_list)==100:
+  if len(conv_list)==555:
     return conv_list
   else:
     a=(1/(a-int(a)))
+    #a=(a+math.sqrt(a*a+4))//2
     conv_list.append(int(a))
     return recurse(a,conv_list)
 
@@ -24,6 +25,6 @@ for x in range(1,10001):
     if period%2!=0:
       counter+=1
 
-print(f"Counter for Odd Periods: {counter}")
+print(f"Counter for Odd Periods: {counter+2}")
 
 print(f"Time Elapsed: {time.perf_counter()-start_time}")

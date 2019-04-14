@@ -30,7 +30,7 @@ def sumofPrimes(n):
 
 if __name__ == '__main__':
 	start=time.perf_counter()
-	n=2000001
+	n=2000000
 	sumVal=sumofPrimes(n)
 	print("Sum of Prime Numbers in range of {} is: {}".format(n,sumVal))
 	print(f"Time Elapsed: {time.perf_counter()-start}")

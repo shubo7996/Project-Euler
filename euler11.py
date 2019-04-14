@@ -1,5 +1,7 @@
 from numpy import *
+import time
 
+start=time.perf_counter()
 filepath="euler11.txt"
 
 with open(filepath,'r') as files:
@@ -17,7 +19,6 @@ for i in array:
 
 problemMatrix=matrix(newArray)
 print(problemMatrix)
-print(problemMatrix[1,2])
 max_prod=1
 
 for i in range(16):
@@ -35,3 +36,5 @@ for i in range(16):
 		if prod>max_prod:
 			max_prod=prod
 print(max_prod)
+print(f"Time elapsed: {time.perf_counter()-start}")
+

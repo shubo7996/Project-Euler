@@ -1,3 +1,6 @@
+import time
+
+start=time.perf_counter()
 from numpy import *
 filepath="euler8.txt"
 
@@ -28,7 +31,8 @@ def adj(big_num):
 		#print(prod_)
 		lists.add(prod_)
 		i+=1
-	print(sorted(lists))
+	#print(sorted(lists))
 	print("Answer is: ",list(sorted(lists))[-1])
 
 adj(big)
+print(f"Time Elapsed: {time.perf_counter()-start} ")
