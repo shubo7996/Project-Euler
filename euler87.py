@@ -32,9 +32,9 @@ power_sum=set()
 for x in prime_sq:
 	for y in prime_thrd:
 		for z in prime_frth:
-			prod=x**2+y**3+z**4
-			if prod>5E7:
+			prod_sum=x**2+y**3+z**4
+			if prod_sum>5E7:
 				break
-			power_sum.add(prod)
+			power_sum.add(prod_sum)
 print(f"Result: {len(power_sum)}")
 print(f"Time Elapsed: {time.perf_counter()-start}")
