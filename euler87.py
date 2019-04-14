@@ -1,9 +1,40 @@
-num_list=[each_num for each_num in range(1,51)]
-count=0
-for x in range(2,len(num_list)):
-	for y in range(x,len(num_list)):
-		for z in range(y,len(num_list)):
-			if x%2==1 and y%2==1 and z%2==1:
-				if (x**2+y**3+z**4) or (x**3+y**4+z**2) or (x**4+y**2+z**3) in num_list:
-					count+=1
-print(count)
+'''
+	Solution@SubhamoyPaul
+'''
+
+import math
+import time
+
+start=time.perf_counter()
+
+def sieve(x):
+	primeList=[True]*(x+1)
+	p=2
+	while(p*p<=x):
+		if primeList[p]==True:
+			i=p*2
+			while(i<=x):
+				primeList[i]=False
+				i+=p
+		p+=1
+
+	prime_numbers=[]
+	for num in range(2,x+1):
+		if (primeList[num]):
+			prime_numbers.append(num)
+
+	return prime_numbers
+
+prime_sq=sieve(int(int(5E7)**(1/2))+1)
+prime_thrd=sieve(int(int(5E7)**(1/3))+1)
+prime_frth=sieve(int(int(5E7)**(1/4))+1)
+power_sum=set()
+for x in prime_sq:
+	for y in prime_thrd:
+		for z in prime_frth:
+			prod=x**2+y**3+z**4
+			if prod>5E7:
+				break
+			power_sum.add(prod)
+print(f"Result: {len(power_sum)}")
+print(f"Time Elapsed: {time.perf_counter()-start}")
