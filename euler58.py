@@ -1,3 +1,9 @@
+'''
+	Solution@SubhamoyPaul
+
+'''
+
+import time
 from collections import OrderedDict
 
 start=time.perf_counter()
@@ -70,6 +76,6 @@ while ratio>0.1:
 	interval+=1
 	
 
-print(prime_dict)
+#print(prime_dict)
 print (f"Result:{int(((2*i+1)**0.5))}")		
 print(f"Time Elapsed: {time.perf_counter()-start}")

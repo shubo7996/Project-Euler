@@ -2,8 +2,6 @@ from Euler_Prime import seive,isPrime
 import time
 
 s_=seive(100000)
-prime_list=[]
-perm_list=[]
 #prime_list=[]
 #for x in range(2,len(seive)):
 #	for y in range(x+1,len(seive)):
