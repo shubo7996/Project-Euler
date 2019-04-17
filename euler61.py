@@ -1,3 +1,7 @@
+import time
+
+start=time.perf_counter()
+
 def square():
 	square_dict={}
 	for x in range(32,100):
@@ -41,22 +45,22 @@ def octagon():
 	return octagon_dict
 
 sq=square()
-print("Square ---->", sq)
-print("----------------------"*15)
+#print("Square ---->", sq)
+#print("----------------------"*15)
 tri=triangle()
-print("Triangle ----->", tri)
-print("----------------------"*15)
+#print("Triangle ----->", tri)
+#print("----------------------"*15)
 pent=pentagon()
-print("Pentagon----->", pent)
-print("----------------------"*15)
+#print("Pentagon----->", pent)
+#print("----------------------"*15)
 hex=hexagon()
-print("Hexagon----->", hex)
-print("----------------------"*15)
+#print("Hexagon----->", hex)
+#print("----------------------"*15)
 hept=heptagon()
-print("Heptagon---->", hept)
-print("----------------------"*15)
+#print("Heptagon---->", hept)
+#print("----------------------"*15)
 octa=octagon()
-print("Octagon---->", octa)
+#print("Octagon---->", octa)
 
 final_sum=0
 c=1
@@ -77,4 +81,5 @@ for octa_val in octa.values():
 											c-=1
 
 							
-print(final_sum)
+print(f"Result:{final_sum}")
+print(f"Time Elapsed: {time.perf_counter()-start}")
