@@ -4,6 +4,8 @@
 	Solution to the #12 problem of the Euler's Project!\
 
 """
+import time
+
 
 def collatz():
 	dict={}
@@ -68,5 +70,7 @@ def findMax(dict):
 	print('Key with the Longest Sequence is {}'.format(key))
 	#print('List: {}'.format(sorted(lengthList)))
 
-
-collatz()
+if __name__=='__main__':
+    start=time.time()
+    collatz()
+    print(f"Time Elapsed: {time.time()-start}")
