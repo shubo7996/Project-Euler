@@ -91,7 +91,7 @@ def check_sum_if_prime(rotatedValuesList,primeNumberList_):
 """
 
 def main():
-	primes=seive(10000)
+	primes=seive(1000000)
 	counter=0
 	for i in primes:
 		numberList=deque([x for x in str(i)])
