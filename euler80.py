@@ -1,8 +1,8 @@
-
+"""
 #This Solution calculates precision upto just 100 decimal places 
 
 import math
-from fractions import Fraction
+#from fractions import Fraction
 import decimal 
 
 def compute_precision(x):
@@ -31,15 +31,16 @@ for x in range(1,101):
 
 print(sum_)
 
-
 """
+
+
     #Using Square root by Subtraction
 
 
 import math
 
 def square_root(num,prec_limit):
-    limit=math.pow(100,prec_limit+1)
+    limit=math.pow(10,prec_limit+1)
     a,b=5*num,5
 
     while(b<limit):
@@ -55,11 +56,12 @@ def square_root(num,prec_limit):
 def main():
     sum_=0
     precision=100
-    for x in range(3,101):
+    for x in range(1,101):
         if (math.sqrt(x)-int(math.sqrt(x))):
+            #y+=1
+            #continue
             sum_+=sum(list(map(int,list(str(square_root(x,precision))))))
     print(sum_)
 
 if __name__=='__main__':
     main()
-"""
