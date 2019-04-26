@@ -22,13 +22,9 @@ def compute_precision(x):
 
 sum_=0    
 for x in range(1,101):
-    #check if sq root of a number is rational or not
     if (math.sqrt(x)-int(math.sqrt(x))):
         dec_=compute_precision(x)
         arr=str(dec_).split('.')
-        #new_arr2_sum=arr[1][1:99]
-        #print(x,"---->",sum(map(int,list(new_arr2_sum))))
-        #print(x,"------>",sum(list(map(int,list(arr[0]+arr[1])))))
         sum_+=sum(list(map(int,list(arr[0]+arr[1][0:99]))))
 
 print("Result is:",sum_)
