@@ -9,7 +9,7 @@ import time
 
 def collatz():
 	dict={}
-	for i in range(13,1000001):
+	for i in range(100000,1000001):
 		list=[]
 		if i%2==0:
 			list.append(i)
