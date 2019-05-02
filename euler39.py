@@ -1,5 +1,8 @@
 
 #euler39
+import time
+
+start=time.perf_counter()
 
 res=0
 high=0
@@ -13,3 +16,4 @@ for p in range(2,1001,2):
     res=p
 
 print(res)
+print(f"Time Elapsed: {time.perf_counter()-start}")
