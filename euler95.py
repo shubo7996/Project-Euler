@@ -42,7 +42,7 @@ for x in range(10000,1000000):
 			break		
 	#print(temp,"---->",chain)
 	if (Counter(list(map(str,chain)))[str(chain[0])])==2:
-		#print(temp,"---->",chain)
+		print(temp,"---->",chain)
 		if len(chain)-1>=max_val:
 			max_val=len(chain)-1
 			set_.add(min(chain[1:len(chain)]))
