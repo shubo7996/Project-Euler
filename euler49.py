@@ -47,7 +47,7 @@ def main():
 				print(check(permList_))
 				break
 
-
+if __name__ == '__main__':
+	main()
 		
 		
-main()
