@@ -1,5 +1,6 @@
 from collections import defaultdict
 from itertools import permutations
+
 squareList=[x*x for x in range(2,32000)]
 filepath="euler98.txt"
 new_list=[]
@@ -88,20 +89,33 @@ def main():
 		#for x in range(0,len(ana_value)):
 		#	for y in range(x+1,len(ana_value)):
 		temp_perm_list=[]
+		c=0
 		perm_=permutations(ana_value,len(ana_value))
 		for x in perm_:
 			word=''.join(x)
-			temp_perm_list.append(word.upper())
-		#print(temp_perm_list)
-		for y in temp_perm_list:
-			if y in word_list and y!=ana_value:
-				temp=y
-				#print(temp)
-				pairvalue=make_square_anagram(ana_value,temp)
-				if pairvalue>result:
-					result=pairvalue
-				print(f"{ana_value} and {temp} ----> {pairvalue}")
-				break
+			temp_perm_list.append(word)
+
+			# if word in word_list:
+			# 	c+=1
+			# 	if c>2:
+			# 		temp=word
+			# 		pairvalue=make_square_anagram(ana_value,temp)
+			# 		if pairvalue>result:
+			# 			result=pairvalue
+			# 		print(f"{ana_value} and {temp} ----> {pairvalue}")
+			# 		break
+
+			#temp_perm_list.append(word.upper())
+		print(temp_perm_list)
+		# for y in temp_perm_list[1:]:
+		# 	if y in word_list and y!=ana_value:
+		# 		temp=y
+		# 		#print(temp)
+		# 		pairvalue=make_square_anagram(ana_value,temp)
+		# 		if pairvalue>result:
+		# 			result=pairvalue
+		# 		print(f"{ana_value} and {temp} ----> {pairvalue}")
+		# 		break
 		#pairvalue=make_square_anagram(ana_value,temp)
 		# if pairvalue>result:
 		# 	result=pairvalue
