@@ -1,37 +1,62 @@
-'''
-	Solution@Subhamoy Paul
-
-'''
-
 import time
+import math
 
-def digital_sum(n):
-	sum_=0
-	while(n>0):
-		d=n%10
-		sum_+=d
-		n=n//10
-	return sum_
+def is_square(x):
+	if x==int(math.sqrt(x))*int(math.sqrt(x)):
+		return True
+	else:
+		return False
+
+
+def continued_fraction_sqrt(n):
+	
+	if is_square(n):
+		return [int(math.sqrt(n))]
+	
+	conv_list=[]
+
+	numerator_first=0
+	denominator_first=1
+
+	while True:
+		next_n=int((math.floor(math.sqrt(n))+numerator_first)/denominator_first)
+		conv_list.append(int(next_n))
+
+		numerator_second=denominator_first
+		denominator_second=numerator_first-denominator_first*next_n
+
+		denominator_third=(n - pow(denominator_second,2)) / numerator_second
+		numerator_third= -denominator_second
+
+		if denominator_third==1:
+			conv_list.append(conv_list[0]*2)
+			break
+
+		numerator_first,denominator_first=numerator_third,denominator_third
+
+	return conv_list[:-1]
+
+def continued_fraction_simple(conv_list):
+	num,den=1,conv_list.pop()
+	while conv_list:
+		den,num=conv_list.pop()*den+num,den
+	return den,num
 
 def main():
-	num=2
-	den=1
-	convergence_list=[2]
-	for x in range(2,101):
-		temp=den
-		if x%3==0:
-			convergence=2*(x//3)
+	largest=0,0
+	for eachnum in range(1,1001):
+		cont_frac=continued_fraction_sqrt(eachnum)
+		if len(cont_frac)%2!=0:
+			x,y=continued_fraction_simple(cont_frac)
+			x,y=2*x**2+1,2*x*y
 		else:
-			convergence=1
-		convergence_list.append(convergence)
-		den=num
-		num=(convergence*den)+temp #(c(n)*num(n-1))+num(n-2)
-
-	print(f"Convergence List: {convergence_list}")	
-	resultant_sum=digital_sum(num)
-	print(f"Sum of Digit of the 100th Convergence Term is: {resultant_sum}")
+			x,y=continued_fraction_simple(cont_frac)
+		if x>largest[1]:
+			largest=eachnum,x
+	print(f"Result: {largest[0]}")
 
 if __name__ == '__main__':
-	start=time.perf_counter()
+	start_time=time.process_time()
 	main()
-	print(f"Time Elapsed: {time.perf_counter()-start}")
+	end_time=time.process_time()
+	print("Time Elapsed: {}".format(end_time-start_time))
