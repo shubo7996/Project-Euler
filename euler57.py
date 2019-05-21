@@ -3,7 +3,7 @@ import math
 def main():
 	limit=1000
 	result=0
-	den,num=2,3
+	num,den=3,2
 
 	for x in range(1,limit):
 		num+=2*den
