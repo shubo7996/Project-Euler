@@ -1,4 +1,5 @@
 import math
+import time
 
 def main():
 	limit=1000
@@ -14,4 +15,6 @@ def main():
 	print(result)
 
 if __name__ == '__main__':
+	start=time.process_time()
 	main()
+	print(f"Time Elapsed: {time.process_time()-start}")
