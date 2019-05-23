@@ -6,8 +6,6 @@ minSumProd=[sys.maxsize]*(limit+1)
 
 def factorization(n,remain,maxFact,_sum,terms):
 	if (remain==1):
-		if(_sum>n):
-			raise AssertionError()
 		terms+=n-_sum
 		if (terms<=limit and n<minSumProd[terms]):
 			minSumProd[terms]=n
@@ -20,6 +18,7 @@ def factorization(n,remain,maxFact,_sum,terms):
 def main():
 	for x in range(2,limit*2+1):
 		factorization(x,x,x,0,0)
+	print(minSumProd[2:])
 	result=sum(set(minSumProd[2:]))
 	print(result)
 
