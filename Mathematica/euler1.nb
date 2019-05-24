@@ -1,0 +1,6 @@
+(*
+	**Mathematica Solution for PE001**
+	Solution-@SubhamoyPaul
+*)
+
+Timing[f[limit_] := Sum[If[Mod[x, 3] == 0 || Mod[x, 5] == 0, x, 0], {x, 1, limit}]; f[999]]
