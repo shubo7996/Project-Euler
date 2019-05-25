@@ -23,13 +23,13 @@ namespace ProjectEuler{
 		}
 		public static BigInteger extract(Dictionary<int,BigInteger> mem_){
 			var mem_val=mem_.Values.ToList();
-			BigInteger sum_=0
+			BigInteger sum_=0;
 			foreach(BigInteger val in mem_val){
 				if (val<=4000000 && val%2==0){
 					sum_+=val;
 				}
 			}
-			return sum_
+			return sum_;
 		}
 	}
 	public class Programe{
