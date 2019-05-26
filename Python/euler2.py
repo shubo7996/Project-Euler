@@ -2,27 +2,25 @@ import time
 
 def fib(n):
 	mem={}
+	flag=False
 	for x in range(1,n+1):
 		if (x<=2):
 			mem[x]=1
-		else:
+		elif flag is not True:
 			mem[x]=mem[x-1]+mem[x-2]
-	return mem
+			flag=_extract(mem[x])
+		else:
+			break	
+	return sum(list(filter(lambda x: not x%2,list(mem.values())))) 
 
-def extract(fib_Dict):
-	sum_=0
-	for v in fib_Dict.values():
-		if v<=4000000:
-			if v%2==0:
-				sum_+=v
-	return sum_  
-
+def _extract(fib_num):
+	if fib_num>4000000:
+		return True
 
 if __name__ == '__main__':
-	start=time.clock()
-	fibonacci_=fib(100)
-	print(fibonacci_)
-	extract_=extract(fibonacci_)
-	print("Answer is: {}".format(extract_))
-	end=time.clock()
+	start=time.perf_counter()
+	print(fib(100))
+	end=time.perf_counter()
 	print("Execution Time: {}".format(end-start))
+
+#Execution Time: 0.00020947300000000169
