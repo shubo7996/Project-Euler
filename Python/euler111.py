@@ -1,5 +1,5 @@
-from Euler_Prime import isPrime,atkins
-import time
+from Euler_Prime import isPrime
+import time,math
 # # # from collections import Counter
 from itertools import product,zip_longest,combinations
 
@@ -105,8 +105,6 @@ from itertools import product,zip_longest,combinations
 # 					digits[-1-j]=d
 # 					temp//=9
 
-
-primeList=atkins(350000)
 
 def generate_numbers(n,d,rep):
 
