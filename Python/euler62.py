@@ -16,7 +16,7 @@ def main():
             break
         i+=1
     print(result**3)
-    print(cubes)
+    #print(cubes)
 
 if __name__ == '__main__':
     start=time.perf_counter()
