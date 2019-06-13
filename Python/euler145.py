@@ -13,17 +13,17 @@ def check(n):
 		return True
 
 count=0
-repeat=[]
+#repeat=[]
 for x in range(1,int(1E9)):
 	if str(x)[-1::-1][0]=='0':
 		continue
-	elif x in repeat or int(str(x)[-1::-1]) in repeat:
-		count+=1
+	#elif x in repeat or int(str(x)[-1::-1]) in repeat:
+	#	count+=1
 	else:
 		sum_=x+int(str(x)[-1::-1])
 		fn=check(sum_)
 		if fn:
 			count+=1
-			repeat.extend([x,int(str(x)[-1::-1])])
-print(count)		
+			#repeat.extend([x,int(str(x)[-1::-1])])
+print(count)
 print(f"Time Elapsed: {time.perf_counter()-start}")
