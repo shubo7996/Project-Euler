@@ -1,8 +1,14 @@
+import sys
+import heapq
+
 class Vertex(object):
 
 	def __init__(self,node):
 		self.id=node
 		self.adjacent={}
+		self.distance=sys.maxint #Set distance to infinity for all nodes
+		self.visited=False #Marking all the  nodes invisited
+		self.previous=None #Previous node
 
 	def __str__(self):
 		return str([x.id for x in self.adjacent])
@@ -18,6 +24,12 @@ class Vertex(object):
 
 	def get_weight(self,neighbour):
 		return self.adjacent[neighbour]
+
+	def set_distance(self,dist):
+		self.distance=dist
+
+	def get_distance(self):
+		return self.distance
 
 
 class Graph(object):
@@ -62,8 +74,30 @@ class Graph(object):
 		# else:
 		# 	self.__graph_dict[vertex1]=vertex2
 
-	# def edges(self):
-	# 	return self.__generate_edges()
+	def set_previous(self,current):
+	 	self.previous=current
+
+	def get_previous(self,current):
+		return self.previous
+
+
+def dijkstra(graph_,start_node):
+
+	print("Dijkstra' Shortest Path: ")
+	
+	''' Set The Distance for the start node to be zero'''
+	start_node.set_distance(0)
+
+	'''Putting Tuple Pair into Priority Queue'''
+	unvisited_queue=[(v.get_distance(),v) for v in graph_]
+	heapq.heapify(unvisited_queue)
+
+
+
+
+
+
+
 
 
 
