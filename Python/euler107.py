@@ -31,6 +31,12 @@ class Vertex(object):
 	def get_distance(self):
 		return self.distance
 
+	def set_previous(self,prev):
+		self.previous=prev
+
+	def set_visited(self):
+		self.visited=True
+
 
 class Graph(object):
 
@@ -80,8 +86,14 @@ class Graph(object):
 	def get_previous(self,current):
 		return self.previous
 
+def shortest(v,path):
+	if v.previous:
+		path.append(v.previous.get_id())
+		shortest(v.previous,path)
+	return
 
-def dijkstra(graph_,start_node):
+
+def dijkstra(graph_,start_node,end_node):
 
 	print("Dijkstra' Shortest Path: ")
 	
@@ -90,22 +102,43 @@ def dijkstra(graph_,start_node):
 
 	'''Putting Tuple Pair into Priority Queue'''
 	unvisited_queue=[(v.get_distance(),v) for v in graph_]
-	heapq.heapify(unvisited_queue)
+	heapq.heapify(unvisited_queue) #heapify brings the smallest element in the heap to zero index
 
+	while len(unvisited_queue):
+		u_v=heapq.heappop(unvisited_queue) #pops vertex with smallest distance
+		current=u_v[1]
+		current.set_visited()
 
+		for next in current.adjacent:
+			if next.visited:
+				continue
+			new_dist=current.get_distance()+current.get_weight(next)
 
+		if new_dist<next.get_distance():
+			next.set_distance(new_dist)
+			next.set_previous(current)
+			print(f"Updated: Current Node= {current.get_id()}, Next Node={next.get_id()}. New Shortest Distance: {next.get_distance()}")
+		else:
+			print(f"Not Updated: Current Node= {current.get_id()}, Next Node={next.get_id()}. New Shortest Distance: {next.get_distance()}")
 
+	'''After considering all the neigbours of the current node, 
+		mark it as visited and remove it from unvisited set'''
 
+		#rebuild heap
+		#pop every item
+		while len(unvisited_queue):
+			heapq.heappop(unvisited_queue)
 
-
-
+		#put all unvisited vertices into queue
+		unvisited_queue=[(v.get_distance(),v) for v in graph_ if not v.visited]
+		heapq.heapify(unvisited_queue)
 
 
 if __name__ == '__main__':
 	
 	graph_obj=Graph()
 
-	Vertices = ["A","B","C","D","E","F"]
+	Vertices = ["A","B","C","D","E","F","G"]
 	for each_vertex in Vertices:
 		graph_obj.add_vertex(each_vertex)
 		
@@ -130,6 +163,12 @@ if __name__ == '__main__':
 			print(f"{vID} " + "---> " + f"{wID} " + "has weight "+ f"{v.get_weight(w)} ")
 
 
-	for v in graph_obj:
-		print(f"__graph_dict[{v.get_id()}]" + "= " + f"{v}")
+	# for v in graph_obj:
+	# 	print(f"__graph_dict[{v.get_id()}]" + "= " + f"{v}")
 
+	dijkstra(graph_obj,graph_obj.get_vertex('A'),graph_obj.get_vertex('G'))
+
+	target= graph_obj.get_vertex('A')
+	path=[target.get_id()]
+	shortest(target,path)
+	print(f"Shortest Path is: {path[::-1]}")
