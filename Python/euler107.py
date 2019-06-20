@@ -6,7 +6,7 @@ class Vertex(object):
 	def __init__(self,node):
 		self.id=node
 		self.adjacent={}
-		self.distance=sys.maxint #Set distance to infinity for all nodes
+		self.distance=sys.maxsize #Set distance to infinity for all nodes
 		self.visited=False #Marking all the  nodes invisited
 		self.previous=None #Previous node
 
@@ -122,16 +122,17 @@ def dijkstra(graph_,start_node,end_node):
 			print(f"Not Updated: Current Node= {current.get_id()}, Next Node={next.get_id()}. New Shortest Distance: {next.get_distance()}")
 
 	'''After considering all the neigbours of the current node, 
-		mark it as visited and remove it from unvisited set'''
+	mark it as visited and remove it from unvisited set'''
 
 		#rebuild heap
 		#pop every item
-		while len(unvisited_queue):
-			heapq.heappop(unvisited_queue)
 
-		#put all unvisited vertices into queue
-		unvisited_queue=[(v.get_distance(),v) for v in graph_ if not v.visited]
-		heapq.heapify(unvisited_queue)
+	while len(unvisited_queue):
+		heapq.heappop(unvisited_queue)
+
+	#put all unvisited vertices into queue
+	unvisited_queue=[(v.get_distance(),v) for v in graph_ if not v.visited]
+	heapq.heapify(unvisited_queue)
 
 
 if __name__ == '__main__':
