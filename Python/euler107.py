@@ -18,13 +18,6 @@ class Graph():
 	def __init__(self,vertices):
 		self.Vertices=vertices
 
-
-	def printMST(self,parent):
-		print("Edge \tWeight")
-		for i in range(1,self.Vertices):
-			print(parent[i],"-",i,"\t",self.graph[i][parent[i]])
-
-
 	def minKey(self,key,mstSet):
 		min_=sys.maxsize
 		for v in range(self.Vertices):
