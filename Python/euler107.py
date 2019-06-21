@@ -1,175 +1,58 @@
+import time
 import sys
-import heapq
 
-class Vertex(object):
+def readFile(filepath):
+	matrix_ = list()
+	with open(filepath, 'r') as filehandle:  
+		for line in filehandle:  
+			currentPlace = line.split('\n')
+			res=list(currentPlace[0].split(','))
+			final_res=list(map(str,res))
+			final_list=[int(0) if x=='-' else int(x) for x in final_res]
+			matrix_.append(final_list)
 
-	def __init__(self,node):
-		self.id=node
-		self.adjacent={}
-		self.distance=sys.maxsize #Set distance to infinity for all nodes
-		self.visited=False #Marking all the  nodes invisited
-		self.previous=None #Previous node
+	return matrix_
 
-	def __str__(self):
-		return str([x.id for x in self.adjacent])
+class Graph():
 
-	def add_neighbours(self,neighbour,weight):
-		self.adjacent[neighbour]=weight
-
-	def get_connections(self):
-		return self.adjacent.keys()
-
-	def get_id(self):
-		return self.id
-
-	def get_weight(self,neighbour):
-		return self.adjacent[neighbour]
-
-	def set_distance(self,dist):
-		self.distance=dist
-
-	def get_distance(self):
-		return self.distance
-
-	def set_previous(self,prev):
-		self.previous=prev
-
-	def set_visited(self):
-		self.visited=True
+	def __init__(self,vertices):
+		self.Vertices=vertices
 
 
-class Graph(object):
-
-	def __init__(self,graph_dict=None):
-		if graph_dict==None:
-			graph_dict={}
-		self.__graph_dict = graph_dict
-		self.num_vertices=0
-
-	def __iter__(self):
-		return iter(self.__graph_dict.values())
-
-	def get_vertices(self):
-		return list(self.__graph_dict.keys())
-
-	def add_vertex(self,node):
-		self.num_vertices+=1
-		new_vertex=Vertex(node)
-		#if node not in self.__graph_dict:
-		#	self.__graph_dict[node]=[new_vertex]
-		self.__graph_dict[node]=new_vertex
-		return new_vertex
-
-	def get_vertex(self,n):
-		if n in self.__graph_dict:
-			return self.__graph_dict[n]
-		else:
-			return None
-
-	def add_edge(self,start,end,cost=0):
-		if start not in self.__graph_dict:
-			self.add_vertex(start)
-		if end not in self.__graph_dict:
-			self.add_vertex(end)
-
-		self.__graph_dict[start].add_neighbours(self.__graph_dict[end],cost)
-		self.__graph_dict[end].add_neighbours(self.__graph_dict[start],cost)
-		# (vertex1,vertex2)=tuple(edge)
-		# if vertex1 in self.__graph_dict:
-		# 	self.__graph_dict[vertex1].append(vertex2)
-		# else:
-		# 	self.__graph_dict[vertex1]=vertex2
-
-	def set_previous(self,current):
-	 	self.previous=current
-
-	def get_previous(self,current):
-		return self.previous
-
-def shortest(v,path):
-	if v.previous:
-		path.append(v.previous.get_id())
-		shortest(v.previous,path)
-	return
+	def printMST(self,parent):
+		print("Edge \tWeight")
+		for i in range(1,self.Vertices):
+			print(parent[i],"-",i,"\t",self.graph[i][parent[i]])
 
 
-def dijkstra(graph_,start_node,end_node):
+	def minKey(self,key,mstSet):
+		min_=sys.maxsize
+		for v in range(self.Vertices):
+			if key[v]< min_ and mstSet[v]==False:
+				min_=key[v]
+				min_index=v
+		return min_index
 
-	print("Dijkstra' Shortest Path: ")
-	
-	''' Set The Distance for the start node to be zero'''
-	start_node.set_distance(0)
+	def primMst(self):
+		key=[sys.maxsize]*self.Vertices
+		parent=[None]*self.Vertices
+		key[0]=0
+		mstSet=[False]*self.Vertices
+		parent[0]=-1
 
-	'''Putting Tuple Pair into Priority Queue'''
-	unvisited_queue=[(v.get_distance(),v) for v in graph_]
-	heapq.heapify(unvisited_queue) #heapify brings the smallest element in the heap to zero index
+		for c_out in range(self.Vertices):
+			u=self.minKey(key,mstSet)
+			mstSet[u]=True
+			for v in range(self.Vertices):
+				if self.graph[u][v]>0 and mstSet[v]==False and key[v]>self.graph[u][v]:
+					key[v]=self.graph[u][v]
+					parent[v]=u
 
-	while len(unvisited_queue):
-		u_v=heapq.heappop(unvisited_queue) #pops vertex with smallest distance
-		current=u_v[1]
-		current.set_visited()
-
-		for next in current.adjacent:
-			if next.visited:
-				continue
-			new_dist=current.get_distance()+current.get_weight(next)
-
-		if new_dist<next.get_distance():
-			next.set_distance(new_dist)
-			next.set_previous(current)
-			print(f"Updated: Current Node= {current.get_id()}, Next Node={next.get_id()}. New Shortest Distance: {next.get_distance()}")
-		else:
-			print(f"Not Updated: Current Node= {current.get_id()}, Next Node={next.get_id()}. New Shortest Distance: {next.get_distance()}")
-
-	'''After considering all the neigbours of the current node, 
-	mark it as visited and remove it from unvisited set'''
-
-		#rebuild heap
-		#pop every item
-
-	while len(unvisited_queue):
-		heapq.heappop(unvisited_queue)
-
-	#put all unvisited vertices into queue
-	unvisited_queue=[(v.get_distance(),v) for v in graph_ if not v.visited]
-	heapq.heapify(unvisited_queue)
-
+		self.printMST(parent)
 
 if __name__ == '__main__':
-	
-	graph_obj=Graph()
-
-	Vertices = ["A","B","C","D","E","F","G"]
-	for each_vertex in Vertices:
-		graph_obj.add_vertex(each_vertex)
-		
-	graph_obj.add_edge("A","B",16)
-	graph_obj.add_edge("A","C",12)
-	graph_obj.add_edge("A","D",21)
-	graph_obj.add_edge("B","D",17)
-	graph_obj.add_edge("B","E",20)
-	graph_obj.add_edge("C","D",28)
-	graph_obj.add_edge("C","F",31)
-	graph_obj.add_edge("D","E",18)
-	graph_obj.add_edge("D","F",19)
-	graph_obj.add_edge("D","G",23)
-	graph_obj.add_edge("E","G",11)
-	graph_obj.add_edge("F","G",27)
-
-
-	for v in graph_obj:
-		for w in v.get_connections():
-			vID=v.get_id()
-			wID=w.get_id()
-			print(f"{vID} " + "---> " + f"{wID} " + "has weight "+ f"{v.get_weight(w)} ")
-
-
-	# for v in graph_obj:
-	# 	print(f"__graph_dict[{v.get_id()}]" + "= " + f"{v}")
-
-	dijkstra(graph_obj,graph_obj.get_vertex('A'),graph_obj.get_vertex('G'))
-
-	target= graph_obj.get_vertex('A')
-	path=[target.get_id()]
-	shortest(target,path)
-	print(f"Shortest Path is: {path[::-1]}")
+	filepath='C:\\Users\\kiit1\\Documents\\Codes\\Project-Euler\\euler107.txt'
+	adj_matrix=readFile(filepath)
+	graph_obj=Graph(40)
+	graph_obj.graph=adj_matrix
+	graph_obj.primMst()
