@@ -48,11 +48,18 @@ class Graph():
 					key[v]=self.graph[u][v]
 					parent[v]=u
 
-		self.printMST(parent)
+		return key
 
 if __name__ == '__main__':
 	filepath='C:\\Users\\kiit1\\Documents\\Codes\\Project-Euler\\euler107.txt'
 	adj_matrix=readFile(filepath)
 	graph_obj=Graph(40)
 	graph_obj.graph=adj_matrix
-	graph_obj.primMst()
+	keys=graph_obj.primMst()
+	min_weight,total_weight=0,0
+	for key in keys:
+		min_weight+=key
+	for x in range(0,len(adj_matrix)):
+		for y in range(x+1,len(adj_matrix[x])):
+			total_weight+=adj_matrix[x][y]
+	print(total_weight-min_weight)
