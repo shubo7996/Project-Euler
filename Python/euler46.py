@@ -43,5 +43,6 @@ for i in compos_:
 for x in odd_compos:
 	if check(x,prime_) is False:
 		print(x)
+		break
 
 
