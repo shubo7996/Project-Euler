@@ -49,9 +49,7 @@ if __name__ == '__main__':
 	graph_obj=Graph(40)
 	graph_obj.graph=adj_matrix
 	keys=graph_obj.primMst()
-	min_weight,total_weight=0,0
-	for key in keys:
-		min_weight+=key
+	min_weight,total_weight=sum(keys),0
 	for x in range(0,len(adj_matrix)):
 		for y in range(x+1,len(adj_matrix[x])):
 			total_weight+=adj_matrix[x][y]
