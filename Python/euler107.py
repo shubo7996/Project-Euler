@@ -17,6 +17,7 @@ class Graph():
 
 	def __init__(self,vertices):
 		self.Vertices=vertices
+		self.graph=[[0 for _ in range(vertices) ] for _ in range(vertices)]
 
 	def minKey(self,key,mstSet):
 		min_=sys.maxsize
