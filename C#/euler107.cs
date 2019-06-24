@@ -114,6 +114,20 @@ namespace ProjectEuler
             return x;
         }
 
+         private bool IsAdjacent(int min_vert, int v)
+        {
+            for (v = 0; v < n; v++)
+            {
+                if (vertexList[min_vert].predecessor == v)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+            
+        }
+
     }
 
    
