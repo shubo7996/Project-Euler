@@ -116,16 +116,45 @@ namespace ProjectEuler
 
     }
 
+   
     class euler107
     {
-        private Array[,] readFile(string filepath)
+        const string filepath = @"C:\Users\kiit1\Documents\Codes\Project-Euler\euler107.txt";
+        private static int[,] readFile(string filepath)
         {
+            int[,] adj_matrix = new int[40,40];
+            int row_ = 0, col_ = 0;
+            using (StreamReader reader = File.OpenText(filepath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] row = line.Split(',');
+                    foreach (string col in row)
+                    {
+                        if (col == "-")
+                        {
+                            adj_matrix[row_, col_] = 0;
+                        }
+                        else
+                        {
+                            adj_matrix[row_, col_] = int.Parse(col);
+                        }
+                        col_++;
+                    }
+                    row_++;
+                    col_ = 0;
+                }
+            }
 
+            return adj_matrix;
         }
 
         public static void Main(string[] args)
-        {
-
+        {            
+            int[,] adj_mat = readFile(filepath);
+            Console.WriteLine(adj_mat[39, 0]);
+            Console.ReadKey();
         }
     }
 }
