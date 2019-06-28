@@ -23,15 +23,16 @@ row_queue,col_queue=[],[]
 row_,col_=0,0
 reached_dest=False
 #minimal_sum=matrix[row_,col_]
-move_count=0
-nodes_left_in_layer=1
-nodes_in_next_layer=0
+#move_count=0
+#nodes_left_in_layer, nodes_in_next_layer=1,0
 
 direction_row=[-1,+1,0,0]
 direction_col=[0,0,+1,-1]
 	
 
-def find_minimal_path_using_bfs():
+def find_minimal_path_using_bfs():	
+	nodes_left_in_layer, nodes_in_next_layer=1,0
+	move_count=0
 	row_queue.append(row_)
 	col_queue.append(col_)
 	visited[row_,col_]=True
@@ -39,6 +40,7 @@ def find_minimal_path_using_bfs():
 		r=row_queue.pop(0)
 		c=col_queue.pop(0)
 		if matrix[r,c]==matrix[ROW-1,COL-1]:
+			reached_dest=True
 			break
 		explore_neighbours(r,c)
 		nodes_left_in_layer-=1
@@ -51,6 +53,7 @@ def find_minimal_path_using_bfs():
 	return-1
 
 def explore_neighbours(r,c):
+	nodes_in_next_layer=0
 	for x in range(0,4):
 		rr=r+direction_row[x]
 		cc=c+direction_col[x]
@@ -67,11 +70,13 @@ def explore_neighbours(r,c):
 		row_queue.append(rr)
 		col_queue.append(cc)
 		visited[rr,cc]=True
+		#print(matrix[rr,cc])
 		nodes_in_next_layer+=1
 
 
 def solve():
-	find_minimal_path_using_bfs()
+	count_=find_minimal_path_using_bfs()
+	print(count_)
 
 if __name__ == '__main__':
 	solve()
