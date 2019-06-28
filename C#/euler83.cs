@@ -90,7 +90,7 @@ namespace ProjectEuler
 
                 Tuple<int, int> min_singular_node = min_nodes[0];
                 permanent[min_singular_node] = min_weight;
-                permanent.Remove(min_singular_node);
+                temporary.Remove(min_singular_node);
                 current_tup = min_singular_node;
 
             }
