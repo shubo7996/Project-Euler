@@ -43,7 +43,7 @@ def isUniqueMatrix(matrix,size):
 
 def solve_sudoku(matrix):
 	#l=[0,0]
-	row,col=-1,1
+	row,col=-1,-1
 	needOperation=False
 	# if not find_empty_location(matrix,l):
 	# 	return True
