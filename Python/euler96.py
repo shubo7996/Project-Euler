@@ -11,16 +11,16 @@ import time
 # 	for x in range(size):
 # 		sum_=0
 # 		for y in range(size):
-# 			if matrix[x,y]<1 or matrix[x,y]>size:
+# 			if matrix[x][y]<1 or matrix[x][y]>size:
 # 				return False
-# 			sum_+=matrix[x,y]
+# 			sum_+=matrix[x][y]
 # 		if sum_!=totalsum:
 # 			return False
 
 # 	for x in range(size):
 # 		sum_=0
 # 		for y in range(size):
-# 			sum_+=matrix[y,x]
+# 			sum_+=matrix[y][x]
 # 		if sum_!=totalsum:
 # 			return False
 
@@ -66,16 +66,17 @@ import time
 
 	
 	
-def isValidRow(matrix,row,n):
+def isValid(matrix,row,col,n):
+	
+	#Row Validation	
 	for x in range(0,9):
 		if matrix[row][x]==n:
 			return False
-	return True
-
-def isValidCol(matrix,col,n):
+	#Column Validation
 	for x in range(0,9):
 		if matrix[x][col]==n:
 			return False
+	
 	return True
 
 def isValidBox(matrix,row,col,n):
@@ -85,8 +86,9 @@ def isValidBox(matrix,row,col,n):
 				return False
 	return True
 
-def isPossible(matrix,row,col,n):
-	return isValidRow(matrix,row,n) and isValidCol(matrix,col,n) and isValidBox(matrix,row-row%3,col-col%3,n)
+def isValidSudoku(matrix,row,col,n):
+	return isValid(matrix,row,col,n) and isValidBox(matrix,row-row%3,col-col%3,n)
+		 
 
 def isSolved(matrix,l):
 	for x in range(0,9):
@@ -103,10 +105,10 @@ def solveSudoku(matrix):
 	# needOperation=False
 
 	# # if isSolved(matrix,l):
-	# # 	return True
+	# #  	return True
 	
 	# for x in range(9):
-	# 	for y in range(0):
+	# 	for y in range(9):
 	# 		if matrix[x][y]==0:
 	# 			row,col=x,y
 	# 			needOperation=True
@@ -121,13 +123,13 @@ def solveSudoku(matrix):
 	# 	return True
 
 	# for num in range(1,10):
-	# 	if isValid(matrix,row,col,num):
-	# 		matrix[row,col]=num
+	# 	if isValidSudoku(matrix,row,col,num):
+	# 		matrix[row][col]=num
 	
-	# 		if solve_sudoku(matrix):
+	# 		if solveSudoku(matrix):
 	# 			return True
 	# 		else:
-	# 			matrix[row,col]=0
+	# 			matrix[row][col]=0
 
 	# return False
 	
@@ -136,7 +138,7 @@ def solveSudoku(matrix):
 		return True
 	row,col=l[0],l[1]
 	for x in range(1,10):
-		if isValidSudoku(matrix):
+		if isValidSudoku(matrix,row,col,x):
 			matrix[row][col]=x
 			if solveSudoku(matrix):
 				return True
