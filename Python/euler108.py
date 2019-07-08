@@ -3,7 +3,7 @@ import itertools
 import time
 
 '''
-1/x + 1/y = 1/n
+1/x + 1/y = 1/n ; x,y > n
 x = n+i ; y = n+j
 
 => 1/n+i + 1/n+j = 1/n
@@ -28,4 +28,3 @@ for x in itertools.count(4):
 end=time.perf_counter()
 
 print(f"Time Elapsed: {end-start}")
-
