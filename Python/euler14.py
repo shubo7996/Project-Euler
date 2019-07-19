@@ -7,70 +7,97 @@
 import time
 
 
-def collatz():
-	dict={}
-	for i in range(100000,1000001):
-		list=[]
-		if i%2==0:
-			list.append(i)
-			calc_for_even(i,list,dict)
-		else:
-			list.append(i)
-			calc_for_odd(i,list,dict)
+# def collatz():
+# 	dict={}
+# 	for i in range(1,1000001):
+# 		list=[]
+# 		if i%2==0:
+# 			list.append(i)
+# 			calc_for_even(i,list,dict)
+# 		else:
+# 			list.append(i)
+# 			calc_for_odd(i,list,dict)
 
-def calc_for_even(n,list,dict):
-	next=n//2
-	if next==1:
-		list.append(next)
-		makeDict(list,dict)
-		#print('Length of the List is: {}'.format(len(list)))
-		return
+# def calc_for_even(n,list,dict):
+# 	next=n//2
+# 	if next==1:
+# 		list.append(next)
+# 		makeDict(list,dict)
+# 		#print('Length of the List is: {}'.format(len(list)))
+# 		return
 
-	if next%2==0:
-		list.append(next)
-		calc_for_even(next,list,dict)
-	else:
-		list.append(next)
-		calc_for_odd(next,list,dict)
+# 	if next%2==0:
+# 		list.append(next)
+# 		calc_for_even(next,list,dict)
+# 	else:
+# 		list.append(next)
+# 		calc_for_odd(next,list,dict)
 	
-def calc_for_odd(n,list,dict):
-	next=(3*n)+1
-	if next==1:
-		list.append(next)
-		makeDict(list,dict)
-		#print('Length of the List is: {}'.format(len(list)))
+# def calc_for_odd(n,list,dict):
+# 	next=(3*n)+1
+# 	if next==1:
+# 		list.append(next)
+# 		makeDict(list,dict)
+# 		#print('Length of the List is: {}'.format(len(list)))
+# 		return
+# 	if next%2==0:
+# 		list.append(next)
+# 		calc_for_even(next,list,dict)
+# 	else:
+# 		list.append(next)
+# 		calc_for_odd(next,list,dict)
+
+# def makeDict(list,dict):
+# 	key=list[0]
+# 	dict[key]=list
+# 	if key==1000000:
+# 		#print(dict)
+# 		findMax(dict)
+
+# def findMax(dict):
+# 	lengthList=[]
+# 	for k in dict.values():
+# 		maxLength=len(k)
+		
+# 		"""
+# 		if You Print out the sorted List, You shall find 525 is largest number in the list.
+# 		Now accordingly, map 525 to the length of the values list and find its corresponding key
+		
+# 		"""
+# 		if maxLength==525:
+# 			val=k
+# 			key=list(dict.keys())[list(dict.values()).index(val)]
+# 	print('Key with the Longest Sequence is {}'.format(key))
+# 	#print('List: {}'.format(sorted(lengthList)))
+
+# if __name__=='__main__':
+#     start=time.time()
+#     collatz()
+#     print(f"Time Elapsed: {time.time()-start}")
+
+
+'''
+	Faster Algorithm
+'''
+
+arr=[]
+
+def collatz(n,c):	
+	if (n==1):
+		arr.append(c)
 		return
-	if next%2==0:
-		list.append(next)
-		calc_for_even(next,list,dict)
+	if (n%2==1):
+		collatz((3*n)+1,c+1)
 	else:
-		list.append(next)
-		calc_for_odd(next,list,dict)
+		collatz(n//2,c+1)
 
-def makeDict(list,dict):
-	key=list[0]
-	dict[key]=list
-	if key==1000000:
-		#print(dict)
-		findMax(dict)
 
-def findMax(dict):
-	lengthList=[]
-	for k in dict.values():
-		maxLength=len(k)
-		
-		"""
-		if You Print out the sorted List, You shall find 525 is largest number in the list.
-		Now accordingly, map 525 to the length of the values list and find its corresponding key
-		
-		"""
-		if maxLength==525:
-			val=k
-			key=list(dict.keys())[list(dict.values()).index(val)]
-	print('Key with the Longest Sequence is {}'.format(key))
-	#print('List: {}'.format(sorted(lengthList)))
+def main():
+	for x in range(1,int(1E6)):
+		c_=collatz(x,1)
+	print(arr.index(max(arr))+1)
 
-if __name__=='__main__':
-    start=time.time()
-    collatz()
-    print(f"Time Elapsed: {time.time()-start}")
+if __name__ == '__main__':
+	start=time.perf_counter()
+	main()
+	print(f"Time:{time.perf_counter()-start}")
