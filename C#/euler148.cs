@@ -34,7 +34,7 @@ namespace ProjectEuler
         //18(base-10)-->24(base-7)-->35-->15
         //This prooves that in the 18th row, there are 15 elements which are not divisible by 7
 
-        private static void inc_m(int[] m, int index)
+        private static void processArray(int[] m, int index)
         {
             m[0] += 1;
             int i = 0;
@@ -46,7 +46,8 @@ namespace ProjectEuler
             }
         }
 
-        private static int get_t(int[] m, int size)
+        //Converts into base 7, adds 1 to each of the digit and multiplies each digit
+        private static int convertMultiply(int[] m, int size)
         {
             int t = 1;
             for (int i = 0; i < size; i++)
@@ -79,9 +80,8 @@ namespace ProjectEuler
 
             for (int i = 0; i < limit; i++)
             {
-                result += get_t(m, size);
-                Console.WriteLine("Start");
-                inc_m(m, base_index);
+                result +=  convertMultiply(m, size);
+                processArray(m, base_index);
             }
 
 
