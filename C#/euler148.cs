@@ -34,7 +34,8 @@ namespace ProjectEuler
         //18(base-10)-->24(base-7)-->35-->15
         //This prooves that in the 18th row, there are 15 elements which are not divisible by 7
 
-        private static void processArray(int[] m, int index)
+        //Converts to base 7
+        private static void convertIntoBase(int[] m, int index)
         {
             m[0] += 1;
             int i = 0;
@@ -46,8 +47,8 @@ namespace ProjectEuler
             }
         }
 
-        //Converts into base 7, adds 1 to each of the digit and multiplies each digit
-        private static int convertMultiply(int[] m, int size)
+        //adds 1 to each of the digit and multiplies each digit
+        private static int addAndMultiply(int[] m, int size)
         {
             int t = 1;
             for (int i = 0; i < size; i++)
@@ -80,8 +81,8 @@ namespace ProjectEuler
 
             for (int i = 0; i < limit; i++)
             {
-                result +=  convertMultiply(m, size);
-                processArray(m, base_index);
+                result +=  addAndMultiply(m, size);
+                convertIntoBase(m, base_index);
             }
 
 
