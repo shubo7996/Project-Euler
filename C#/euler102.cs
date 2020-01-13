@@ -18,16 +18,27 @@ namespace ProjectEuler
 
         private static void processFile(string filehandle)
         {
-            List<IEnumerable<int>> cord_list = new List<IEnumerable<int>>();
-            string[] lines = filehandle.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-            IEnumerable<int> inside_arr = new int[lines.Length];
-            for (int i = 0; i < lines.Length; i++)
+            List<int[]> cord_list = new List<int[]>();
+            string[] lines = filehandle.Split('\n');
+            for (int i = 0; i < lines.Count(); i++)
             {
-                inside_arr = lines[i].Split(',').Select(x => Convert.ToInt32(x));
-                Console.WriteLine(inside_arr);
+                int[] inside_arr = lines[i].Split(',').Select(x => int.TryParse(x, out int n) ? n : 0).ToArray();
                 cord_list.Add(inside_arr);
             }
+            checkOrigin(cord_list);
+        }
 
+        private static void checkOrigin(List<int[]> cord_list)
+        {
+           foreach (int[] arr in cord_list)
+            {
+                IEnumerable<int> A1 = arr.Take(2).ToArray();
+                IEnumerable<int> B1 = arr.Skip(2).Take(2);
+                IEnumerable<int> C1 = arr.Skip(4).Take(2);
+
+                
+           }
+           
         }
     }
 
