@@ -13,7 +13,6 @@ namespace ProjectEuler
         int getCrossProduct(Vector V1, Vector V2);
     }
 
-
     public struct Vector: ICrossProd
     {
         public int x;
@@ -43,12 +42,6 @@ namespace ProjectEuler
             }
         }
 
-        //public Vector(int x, int y)
-        //{
-        //    this.x = x;
-        //    this.y = y;
-        //}
-
         public int getCrossProduct(Vector V1, Vector V2)
         {
             return V1.x * V2.y - V1.y * V2.x;
@@ -60,7 +53,6 @@ namespace ProjectEuler
     class euler104
     {
         
-
         public static void readTextFromURL(string filepath)
         {
             try
@@ -80,7 +72,7 @@ namespace ProjectEuler
         {
             List<int[]> cord_list = new List<int[]>();
             string[] lines = filehandle.Split('\n');
-            for (int i = 0; i < lines.Count(); i++)
+            for (int i = 0; i < lines.Length-1; i++)
             {
                 int[] inside_arr = lines[i].Split(',').Select(x => int.TryParse(x, out int n) ? n : 0).ToArray();
                 cord_list.Add(inside_arr);
@@ -94,17 +86,18 @@ namespace ProjectEuler
             Vector vect = new Vector();
             foreach (int[] arr in cord_list)
             {
-                var vec1 = arr.Take(2).ToList();
+                IEnumerable<int> vec1 = arr.Take(2).ToList();
                 Vector vector1 = new Vector();
-                vector1.x = vec1[0];vector1.y = vec1[1];
+                vector1.x = vec1.ElementAt(0); vector1.y = vec1.ElementAt(0);
 
-                var vec2 = arr.Skip(2).Take(2).ToList();
+
+                IEnumerable<int> vec2 = arr.Skip(2).Take(2).ToList();
                 Vector vector2 = new Vector();
-                vector2.x = vec2[0];vector2.y = vec2[1];
+                vector2.x = vec2.ElementAt(0);vector2.y = vec1.ElementAt(1);
 
-                var vec3 = arr.Skip(4).Take(2).ToList();
+                IEnumerable<int> vec3 = arr.Skip(4).Take(2).ToList();
                 Vector vector3 = new Vector();
-                vector3.x = vec3[0];vector3.y = vec3[1];
+                vector3.x = vec1.ElementAt(0); vector3.y = vec1.ElementAt(1);
 
                 if ((vect.getCrossProduct(vector1, vector2) > 0 && vect.getCrossProduct(vector1, vector3) < 0) || (vect.getCrossProduct(vector1, vector2) < 0 && vect.getCrossProduct(vector1, vector3) > 0))
                 {
